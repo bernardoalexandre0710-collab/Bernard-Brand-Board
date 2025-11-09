@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Board: Bernard Ethical Hacking</title>
+    <!-- Incluir Tailwind CSS para estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuração de Fonte */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:wght@400;700&family=Fira+Code:wght@400;700&display=swap');
+        
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-primary-blue: #008CFF;
+            --color-secondary-gray: #121212;
+            --color-terminal-green: #00FF00; /* Verde clássico de terminal */
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--color-black);
+            color: var(--color-white);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .brand-section {
+            padding: 3rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 20px rgba(0, 140, 255, 0.1);
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--color-white);
+            border-bottom: 5px solid var(--color-primary-blue);
+            display: inline-block;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-header {
+            color: var(--color-primary-blue);
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Estilos da Paleta de Cores (existente) */
+        .color-block {
+            height: 14rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Estilos do Logótipo (existente) */
+        .logo-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 220px;
+            background-color: var(--color-black);
+            border: 1px solid var(--color-secondary-gray);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .logo-box:hover {
+            border-color: var(--color-primary-blue);
+        }
+
+        /* Estilos de Cartão Funcional */
+        .tool-card {
+            box-shadow: 0 0 10px rgba(0, 140, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .tool-card:hover {
+            box-shadow: 0 0 20px rgba(0, 140, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        .tool-card.selected {
+            outline: 4px solid var(--color-primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* --- Terminal Específico --- */
+        .terminal-window {
+            background-color: #0d1117; /* Fundo escuro de Terminal/VSCode */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 140, 255, 0.4);
+            font-family: 'Fira Code', monospace; /* Fonte monoespaçada para código */
+            font-size: 0.9rem;
+        }
+
+        .terminal-header {
+            background-color: #333;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #444;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .terminal-content {
+            height: 400px;
+            padding: 15px;
+            overflow-y: auto;
+            white-space: pre-wrap; /* Permite quebras de linha */
+            color: var(--color-terminal-green);
+        }
+        
+        .terminal-prompt {
+            color: var(--color-primary-blue); /* Cor para o prompt 'kali@bernard' */
+            font-weight: bold;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            padding: 5px 15px 15px 15px;
+        }
+
+        .terminal-input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            color: var(--color-terminal-green);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .terminal-output {
+            margin-bottom: 10px;
+            color: #ccc; /* Cor de texto padrão para output */
+        }
+        
+        .output-success {
+            color: var(--color-terminal-green);
+        }
+        .output-error {
+            color: #FF4444; /* Vermelho para erros/falhas */
+        }
+        .output-highlight {
+            color: yellow; /* Amarelo para destacar informações */
+        }
+        .output-info {
+            color: var(--color-primary-blue); /* Azul para informações de cabeçalho */
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- TÍTULO PRINCIPAL (PROFISSIONAL E IMPACTANTE) -->
+        <header class="mb-20 text-center">
+            <h1 class="main-title mx-auto">BRAND BOARD</h1>
+            <h2 class="text-3xl font-light text-gray-400 mt-4 tracking-widest uppercase">BERNARD ETHICAL HACKING</h2>
+        </header>
+
+        <!-- SECÇÃO 1: PALETA DE CORES (existente) -->
+        <section class="brand-section bg-secondary-gray">
+            <h3 class="section-header">1. PALETA DE CORES - PRECISÃO E FOCO</h3>
+            <!-- Conteúdo da paleta de cores... -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Cor 1: Preto (Profundidade e Base) -->
+                <div class="color-block" style="background-color: var(--color-black);">
+                    <p class="text-xl">PRETO SÓLIDO</p>
+                    <p class="text-sm font-normal text-gray-400">#000000</p>
+                    <p class="text-xs font-normal mt-1">Fundo, Profundidade, Autoridade</p>
+                </div>
+                <!-- Cor 2: Azul Primário (Ação e Confiança) -->
+                <div class="color-block" style="background-color: var(--color-primary-blue);">
+                    <p class="text-xl">AZUL CIBER</p>
+                    <p class="text-sm font-normal text-white">#008CFF</p>
+                    <p class="text-xs font-normal mt-1 text-black bg-white bg-opacity-70 rounded px-1">Destaque, CTA, Tecnologia</p>
+                </div>
+                <!-- Cor 3: Branco (Contraste e Clareza) -->
+                <div class="color-block" style="background-color: var(--color-white); color: var(--color-black);">
+                    <p class="text-xl">BRANCO PURO</p>
+                    <p class="text-sm font-normal text-gray-600">#FFFFFF</p>
+                    <p class="text-xs font-normal mt-1 text-black">Texto Principal, Legibilidade</p>
+                </div>
+                <!-- Cor 4: Cinza Secundário (Componentes e Hierarquia) -->
+                <div class="color-block" style="background-color: var(--color-secondary-gray); color: #BDBDBD;">
+                    <p class="text-xl">CINZA ESCURO</p>
+                    <p class="text-sm font-normal text-gray-500">#121212</p>
+                    <p class="text-xs font-normal mt-1">Cartões, Secções, Backgrounds Ligeiros</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO 2: LOGÓTIPO E VERSÕES (existente) -->
+        <section class="brand-section bg-secondary-gray">
+            <h3 class="section-header">2. LOGÓTIPO, VERSÕES E ESCALA</h3>
+            <!-- Conteúdo do logótipo... -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Logótipo Principal (Horizontal, Mais Profissional) -->
+                <div class="md:col-span-3 p-8 bg-black rounded-lg mb-4 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+                    <div class="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center text-4xl font-black text-white">B</div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-4xl font-bold uppercase tracking-widest text-white block">BERNARD</span>
+                        <span class="block text-xl font-light uppercase tracking-widest" style="color: var(--color-primary-blue);">ETHICAL HACKING</span>
+                    </div>
+                </div>
+
+                <!-- Ícone da Marca (Uso em Apps/Favicons) -->
+                <div class="logo-box">
+                    <svg class="w-16 h-16" style="color: var(--color-white);" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944v0c-1.478 0-2.943.439-4.148 1.258C6.5 5.011 5.4 6.2 4.6 7.556a12.01 12.01 0 00-.7 4.444c0 3.79 1.94 7.218 5 9.112v0c1.2.738 2.58 1.108 4 1.108 1.42 0 2.8-.37 4-1.108v0c3.06-1.894 5-5.322 5-9.112a12.01 12.01 0 00-.7-4.444z"></path>
+                    </svg>
+                    <p class="text-sm text-gray-400 mt-4">Ícone Monocromático</p>
+                </div>
+                
+                <!-- Versão Negativa (Contraste) -->
+                <div class="logo-box bg-white border-gray-300">
+                    <span class="text-2xl font-bold text-black uppercase">BERNARD</span>
+                    <p class="text-sm text-gray-600 mt-2">Versão Negativa (Fundo Claro)</p>
+                </div>
+
+                <!-- Textura de Fundo (Tech Pattern) -->
+                <div class="p-4 rounded-lg bg-black flex flex-col justify-center">
+                    <div class="bg-[linear-gradient(to_right,rgba(0,140,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,140,255,0.05)_1px,transparent_1px)] bg-[length:25px_25px] p-4 border border-blue-900/50 rounded-lg h-full flex items-center justify-center">
+                        <p class="text-sm text-gray-700">Padrão de Circuito (Subtil)</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Reforça a identidade técnica.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECÇÃO 6: TERMINAL SIMULATOR KALI LINUX (FUNCIONALIDADE CHAVE) -->
+        <section id="kali-tools-section" class="brand-section bg-secondary-gray">
+            <h3 class="section-header">6. SIMULADOR DE TERMINAL KALI LINUX ⚡</h3>
+            <p class="text-gray-400 mb-6">Selecione uma ferramenta para abrir o terminal. Digite comandos reais (ex: `nmap 127.0.0.1`) e execute-os. A IA irá simular o output de forma **100% segura e ética**.</p>
+            
+            <!-- Cards de Seleção de Ferramentas -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                
+                <!-- Tool Card: Nmap -->
+                <div data-tool="nmap" class="tool-card p-6 bg-black border-t-4 border-l-2 cursor-pointer transition duration-300 hover:shadow-2xl hover:bg-gray-900" style="border-color: var(--color-terminal-green); border-radius: 0.5rem;">
+                    <h4 class="text-2xl font-bold text-white mb-2">Nmap</h4>
+                    <p class="text-sm uppercase text-gray-500 mb-3">Reconhecimento de Rede</p>
+                </div>
+
+                <!-- Tool Card: Wireshark -->
+                <div data-tool="wireshark" class="tool-card p-6 bg-black border-t-4 border-l-2 cursor-pointer transition duration-300 hover:shadow-2xl hover:bg-gray-900" style="border-color: var(--color-terminal-green); border-radius: 0.5rem;">
+                    <h4 class="text-2xl font-bold text-white mb-2">Wireshark</h4>
+                    <p class="text-sm uppercase text-gray-500 mb-3">Análise de Tráfego</p>
+                </div>
+
+                <!-- Tool Card: John the Ripper -->
+                <div data-tool="john" class="tool-card p-6 bg-black border-t-4 border-l-2 cursor-pointer transition duration-300 hover:shadow-2xl hover:bg-gray-900" style="border-color: var(--color-terminal-green); border-radius: 0.5rem;">
+                    <h4 class="text-2xl font-bold text-white mb-2">John the Ripper</h4>
+                    <p class="text-sm uppercase text-gray-500 mb-3">Auditoria de Password</p>
+                </div>
+
+            </div>
+
+            <!-- Terminal Simulator Area -->
+            <div id="terminalSimulator" class="terminal-window hidden">
+                <div class="terminal-header">
+                    <div class="flex items-center">
+                        <div class="terminal-dot bg-red-500"></div>
+                        <div class="terminal-dot bg-yellow-500"></div>
+                        <div class="terminal-dot bg-green-500"></div>
+                    </div>
+                    <span id="terminalTitle" class="text-sm text-gray-400 font-bold uppercase">Bernard Kali Sim - Nmap</span>
+                </div>
+
+                <div id="terminalContent" class="terminal-content">
+                    <p class="output-info">Bem-vindo ao Simulador Ético de Comandos Bernard.</p>
+                    <p class="output-info">Digite um comando real e observe o output simulado.</p>
+                    <p class="output-info">Ex: <span class="output-highlight">nmap -sV 127.0.0.1</span></p>
+                    <p class="output-info mb-4">A execução é 100% segura e simulada por IA.</p>
+                </div>
+
+                <div class="terminal-input-line">
+                    <span id="currentPrompt" class="terminal-prompt">kali@bernard-hack:~$</span>
+                    <input type="text" id="commandInput" class="terminal-input" placeholder="Digite o comando aqui..." autocomplete="off">
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="terminalLoading" class="mt-4 hidden text-center text-sm text-blue-400">
+                <p>A executar comando na sandbox... (A gerar output realista da ferramenta via IA)</p>
+            </div>
+            
+             <!-- Error/Info Message Box -->
+            <div id="messageBox" class="mt-4 p-3 bg-red-900 border border-red-500 text-white rounded-lg hidden"></div>
+
+        </section>
+        
+        <footer class="mt-16 text-center text-gray-700 text-sm">
+            Brand Board Profissional | Bernard Ethical Hacking. Design centrado na precisão e confiança técnica (Setembro 2025).
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Gemini API Configuration and Helper Functions ---
+        const apiKey = ""; // Chave de API será fornecida pelo ambiente
+        const textModel = "gemini-2.5-flash-preview-09-2025";
+        const maxRetries = 5;
+
+        // Elementos do Terminal
+        const terminalSimulator = document.getElementById('terminalSimulator');
+        const terminalTitle = document.getElementById('terminalTitle');
+        const terminalContent = document.getElementById('terminalContent');
+        const currentPrompt = document.getElementById('currentPrompt');
+        const commandInput = document.getElementById('commandInput');
+        const terminalLoading = document.getElementById('terminalLoading');
+        const messageBox = document.getElementById('messageBox');
+        
+        let currentTool = null;
+
+        // Função para mostrar mensagens de erro/info
+        function showMessage(text, isError = false) {
+            messageBox.textContent = text;
+            messageBox.className = isError 
+                ? 'mt-4 p-3 bg-red-900 border border-red-500 text-white rounded-lg'
+                : 'mt-4 p-3 bg-blue-900 border border-blue-500 text-white rounded-lg';
+            messageBox.classList.remove('hidden');
+            setTimeout(() => messageBox.classList.add('hidden'), 5000);
+        }
+
+        // Função para tratar chamadas de API com repetição exponencial
+        async function fetchWithRetry(url, options, attempt = 1) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status === 429 && attempt < maxRetries) {
+                    const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithRetry(url, options, attempt + 1);
+                }
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.statusText}`);
+                }
+                return response.json();
+            } catch (error) {
+                if (attempt >= maxRetries) {
+                    throw new Error("Não foi possível conectar-se à API Gemini após várias tentativas.");
+                }
+                const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithRetry(url, options, attempt + 1);
+            }
+        }
+        
+        // --- Core LLM Function: Command Simulation ---
+        async function simulateToolCommand(toolName, command) {
+            // Regras estritas para garantir que o output é FICCIONAL, ÉTICO e SIMULADO.
+            const systemPrompt = `Act as a secure, sandboxed command-line interface (CLI) for an ethical hacker's tool. The current tool selected is '${toolName}'. Your task is to process the user's input command and provide a realistic, simulated output.
+
+RULES:
+1. The output MUST be entirely fictional, safe, and based on a localhost (127.0.0.1) or mock target (192.168.1.10) scenario.
+2. DO NOT perform any real network operations.
+3. The response must be formatted like genuine command-line output, including version headers, timestamps, and formatting specific to the tool (e.g., Nmap table format, Wireshark packet summary, JtR summary).
+4. The response should be concise, professional, and ethical. 
+5. The language of the simulation should be English, matching standard tool outputs.
+6. Only return the raw text output, without any commentary or JSON structure.`;
+            
+            const userQuery = `Simulate the output for the command: ${command}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${textModel}:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            };
+
+            const result = await fetchWithRetry(apiUrl, options);
+            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            
+            if (text) {
+                return text;
+            } else {
+                throw new Error("Resposta de simulação vazia.");
+            }
+        }
+
+        // Adiciona uma linha de output ao terminal
+        function addTerminalLine(text, className = 'terminal-output') {
+            const line = document.createElement('div');
+            line.className = className;
+            line.innerHTML = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Evita XSS
+            terminalContent.appendChild(line);
+            // Scroll para o fim
+            terminalContent.scrollTop = terminalContent.scrollHeight;
+        }
+
+        // Função para simular o comando e mostrar o output
+        async function handleCommandExecution() {
+            const command = commandInput.value.trim();
+            commandInput.value = '';
+
+            if (!command) return;
+
+            // 1. Mostrar o comando digitado no terminal
+            addTerminalLine(`<span class="terminal-prompt">kali@bernard-hack:~$</span> ${command}`, 'terminal-output');
+            
+            // Tratamento de comandos básicos
+            if (command === 'clear') {
+                terminalContent.innerHTML = '';
+                addTerminalLine('<p class="output-info">Terminal limpo.</p>', 'terminal-output');
+                return;
+            }
+
+            if (!currentTool) {
+                addTerminalLine('<span class="output-error">ERRO: Nenhuma ferramenta selecionada. Selecione uma ferramenta primeiro.</span>', 'terminal-output');
+                return;
+            }
+
+            // 2. Chamar a simulação
+            terminalLoading.classList.remove('hidden');
+            commandInput.disabled = true;
+
+            try {
+                const simulatedOutput = await simulateToolCommand(currentTool, command);
+                
+                // 3. Adicionar output simulado
+                // A IA retorna o output em texto simples, formatado para terminal.
+                // Substituímos as quebras de linha por elementos div para manter a formatação pre-wrap.
+                const lines = simulatedOutput.split('\n');
+                lines.forEach(line => {
+                    // Adiciona classes para destacar cores de terminal
+                    let className = 'terminal-output';
+                    if (line.includes('ERROR') || line.includes('failed') || line.includes('0 cracked')) {
+                        className = 'output-error';
+                    } else if (line.includes('open') || line.includes('cracked password')) {
+                        className = 'output-success';
+                    } else if (line.startsWith('Starting') || line.startsWith('Nmap scan report')) {
+                        className = 'output-info';
+                    }
+
+                    addTerminalLine(line, className);
+                });
+
+            } catch (error) {
+                console.error("Erro na simulação do comando:", error);
+                addTerminalLine(`<span class="output-error">ERRO DE SIMULAÇÃO: ${error.message}</span>`, 'terminal-output');
+            } finally {
+                terminalLoading.classList.add('hidden');
+                commandInput.disabled = false;
+                commandInput.focus();
+            }
+        }
+
+
+        // --- UI Interaction and Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            // Adiciona o listener para execução do comando (tecla ENTER)
+            commandInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleCommandExecution();
+                }
+            });
+
+            // Listener para seleção de ferramentas
+            toolCards.forEach(card => {
+                card.addEventListener('click', (event) => {
+                    const clickedCard = event.currentTarget;
+                    const toolName = clickedCard.getAttribute('data-tool');
+                    const toolDisplayName = toolName.charAt(0).toUpperCase() + toolName.slice(1);
+                    
+                    // 1. Highlight the clicked card
+                    toolCards.forEach(c => c.classList.remove('selected'));
+                    clickedCard.classList.add('selected');
+                    
+                    // 2. Setup Terminal State
+                    currentTool = toolName;
+                    terminalSimulator.classList.remove('hidden');
+                    terminalTitle.textContent = `Bernard Kali Sim - ${toolDisplayName}`;
+                    
+                    // 3. Reset Terminal Content
+                    terminalContent.innerHTML = '';
+                    addTerminalLine(`<p class="output-info">Ferramenta ${toolDisplayName.toUpperCase()} carregada.</p>`, 'terminal-output');
+                    addTerminalLine('<p class="output-info">Digite um comando e pressione ENTER para simular a execução.</p>', 'terminal-output');
+                    
+                    if (toolName === 'nmap') {
+                        addTerminalLine('<p class="output-highlight">Sugestão: nmap -sV 127.0.0.1</p>', 'terminal-output');
+                    } else if (toolName === 'wireshark') {
+                        addTerminalLine('<p class="output-highlight">Sugestão: wireshark -i eth0 -c 10 | grep "HTTPS"</p>', 'terminal-output');
+                    } else if (toolName === 'john') {
+                         addTerminalLine('<p class="output-highlight">Sugestão: john --wordlist=passwords.lst --format=raw-md5 hash_file.txt</p>', 'terminal-output');
+                    }
+                    
+                    // 4. Focus Input
+                    commandInput.focus();
+                });
+            });
+
+            // Exibir mensagem inicial se o JS carregar
+            showMessage("O simulador de terminal está pronto! Selecione uma ferramenta abaixo.", false);
+
+        });
+    </script>
+</body>
+</html>

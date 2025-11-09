@@ -1,0 +1,19 @@
+Ficheiros de log e cache que não devem ser rastreados
+
+*.log
+*.tmp
+.DS_Store # Apple macOS
+Thumbs.db # Windows
+
+Ficheiros gerados pelo editor de código (ex: VS Code, Sublime Text)
+
+.vscode/
+.sublime/
+
+Dependências (se fosse um projeto Node.js)
+
+node_modules/
+
+Ficheiros sensíveis à API (embora neste caso a chave esteja vazia)
+
+.env
